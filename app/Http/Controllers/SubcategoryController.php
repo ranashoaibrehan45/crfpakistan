@@ -24,7 +24,7 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('has_children', ture)->orderBy('name')->get();
+        $categories = Category::where('has_children', true)->orderBy('name')->get();
 
         return view('admin.subcategory.create', compact('categories'));
     }
@@ -67,8 +67,6 @@ class SubcategoryController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($data['name'], '-');
-
-        $subcategory->update($data);
 
         return redirect()->back()->with('status', 'Sub-Category updated successfully.');
     }

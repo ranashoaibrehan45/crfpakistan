@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SubcategoryRequest extends FormRequest
 {
@@ -22,12 +23,17 @@ class SubcategoryRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => ['required', 'string', 'unique:subcategories,name'],
+            'category_id' => ['required'],
+            'name' => ['required', 'string', 'unique:subcategories'],
         ];
 
         if (request()->isMethod('put')) {
             $rules = [
-                'name' => ['required', 'string', 'unique:subcategories,name,'.request('subcategory').',id'],
+                'name' => [
+                    'required',
+                    'string',
+                    Rule::unique('subcategories')->ignore(request('subcategory')),
+                ],
             ];
         }
 

@@ -17,19 +17,18 @@
                         <!-- Category -->
                         <div>
                             <x-input-label for="category_id" :value="__('Category')" />
-                            <select class="">
+                            <select name="category_id" class="block w-full mt-1 px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                                 <option value="category_id">--Choose Category--</option>
                                 
                                 @foreach($categories as $category)
-                                <option value="category_id">--Choose Category--</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            <x-text-input id="category_id" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
                         </div>
 
                         <!-- Name -->
-                        <div>
+                        <div class="mt-3">
                             <x-input-label for="name" :value="__('Name')" />
                             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />

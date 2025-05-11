@@ -2893,3 +2893,7 @@ a.btn.btn-primary.cro:hover {
     background: #131212;
     text-align: center;
 }
+
+.text-left {
+    text-align: left;
+}

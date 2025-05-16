@@ -24,7 +24,9 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('has_children', true)->orderBy('name')->get();
+        $categories = Category::where('has_children', true)
+            ->orderBy('name')
+            ->get();
 
         return view('admin.subcategory.create', compact('categories'));
     }
@@ -55,7 +57,9 @@ class SubcategoryController extends Controller
      */
     public function edit(Subcategory $subcategory)
     {
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::where('has_children', true)
+            ->orderBy('name')
+            ->get();
 
         return view('admin.subcategory.edit', compact('subcategory', 'categories'));
     }
@@ -76,6 +80,10 @@ class SubcategoryController extends Controller
      */
     public function destroy(Subcategory $subcategory)
     {
-        //
+        if ($subcategory->delete()) {
+            return back()->with('status', 'SubCategory deleted successfully!');
+        }
+
+        return back()->with('error', 'There is some problem, Please try again later!');
     }
 }

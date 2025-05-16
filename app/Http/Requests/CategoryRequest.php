@@ -24,6 +24,7 @@ class CategoryRequest extends FormRequest
         $rules = [
             'name' => ['required', 'string', 'unique:categories,name'],
             'has_children' => ['nullable'],
+            'type' => ['required', 'in:header,footer'],
         ];
 
         if (request()->isMethod('put')) {

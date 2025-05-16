@@ -267,7 +267,20 @@ ul.inner {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
     color: #fff;
-    background-color: #0066b0 !important;
+    /* background-color: #0066b0 !important; */
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: #fff !important;
+}
+
+.dropdown-toggle::after {
+    border-top: none !important;
+}
+
+nav ul li a:not(:only-child):after {
+    margin-top: -5px;
 }
 
 ul#myTab li a {

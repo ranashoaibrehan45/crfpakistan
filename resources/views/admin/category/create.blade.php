@@ -21,8 +21,21 @@
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
-                        <!-- Remember Me -->
+                        <!-- Type -->
                         <div class="block mt-4">
+                            <x-input-label for="name" :value="__('Type')" class="mb-3" />
+                            <label for="header" class="inline-flex items-center">
+                                <input name="type" id="header" type="radio" value="header" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Header') }}</span>
+                            </label>
+                            <label for="footer" class="inline-flex items-center">
+                                <input name="type" id="footer" type="radio" value="footer" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Footer') }}</span>
+                            </label>
+                        </div>
+
+                        <div class="block mt-4">
+                            <x-input-label for="name" :value="__('Has Children')" class="mb-3" />
                             <label for="has_children" class="inline-flex items-center">
                                 <input id="has_children" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="has_children">
                                 <span class="ms-2 text-sm text-gray-600">{{ __('Has Sub-Categories') }}</span>

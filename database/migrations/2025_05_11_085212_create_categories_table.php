@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->nullable();
             $table->boolean('has_children')->default(false);
-            $table->enum('type', ['header', 'footer'])->default('header');
+            $table->boolean('header_link')->default(false);
+            $table->boolean('footer_link')->default(false);
+            $table->boolean('multiple_pages')->default(false);
             $table->softDeletes();
         });
     }

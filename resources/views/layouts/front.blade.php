@@ -90,8 +90,12 @@
                                 <a class="nav-link active" href="{{ url('/') }}">Home</a>
                             </li>
 
-                            @foreach(\App\Models\Category::with('subcategories')->orderBy('name')->get() as $category)
-                                @if ($category->subcategories->isNotEmpty())
+                            @foreach(\App\Models\Category::where('header_link', true)->with('subcategories')->orderBy('name')->get() as $category)
+                                 @if ((!$category->has_children && $category->pages->isEmpty()) || (!$category->isValidNavLink()))
+                                    @continue
+                                @endif
+                                
+                                @if ($category->has_children && $category->subcategories->isNotEmpty())
                                     <li class="nav-item dropdown">
                                         <a href="#" 
                                             class="nav-link dropdown-toggle" 
@@ -100,20 +104,39 @@
                                             {{ $category->name }}
                                         </a>
                                         <div class="dropdown-menu">
-                                            @foreach($category->subcategories as $subcategory)
-                                                <a class="dropdown-item no-caret" href="{{ route('page', $subcategory->page->slug) }}">
-                                                    {{ $subcategory->name }}
-                                                </a>
+                                            @foreach($category->subcategories()->where('header_link', true)->get() as $subcategory)
+                                                @if($subcategory->multiple_pages && $subcategory->pages->isNotEmpty())
+                                                    <a class="dropdown-item no-caret" href="{{ route('subcategory.pages', ['categorySlug' => $category->slug, 'subCatSlug' => $subcategory->slug]) }}">
+                                                        {{ $subcategory->name }}
+                                                    </a>
+                                                @elseif($subcategory->pages->isNotEmpty())
+                                                    <a class="dropdown-item no-caret" href="{{ route('subcategory.page', ['categorySlug' => $category->slug, 'subCatSlug' => $subcategory->slug, 'pageSlug' => $subcategory->pages()->first()->slug]) }}">
+                                                        {{ $subcategory->name }}
+                                                    </a>
+                                                @endif
                                             @endforeach
                                         </div>
                                     </li>
                                 @else
+                                    @if($category->pages->isNotEmpty())
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">{{ $category->name }}</a>
+                                        @if ($category->multiple_pages)
+                                            <a class="dropdown-item no-caret" href="{{ route('category.pages', $category?->slug) }}">
+                                                {{ $category?->name }}
+                                            </a>
+                                        @else
+                                            <a class="dropdown-item no-caret" href="{{ route('category.page', ['categorySlug' => $category->slug, 'pageSlug' => $category->pages->first()->slug]) }}">
+                                                {{ $category->name }}
+                                            </a>
+                                        @endif
                                     </li>
+                                    @endif
                                 @endif
                             @endforeach
 
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('album') }}">Gallery</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('contact.create') }}">Contact Us</a>
                             </li>
@@ -140,17 +163,55 @@
                                 <p>Centre for Resource and Facilitation Pakistan (CrfPak) was born in 2025 .</p>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-4 mt-5 mt-md-0 ">
-                            <div class="foot-contact ">
-                                <h2>Quick Links</h2>
-                                <ul>
-                                    <a href="index.php "></a><li><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><span>Home</span></li></a>
-                                    <a href="aboutus.php "> <li><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><span>About us</span></li></a>
-                                    <a href="gallery.php "><li><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><span>Media Gallery</span></li></a>
-                                    <a href="contact_us.php "><li><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><span>Contact us</span></li></a>
-                                </ul>
+
+                        @foreach(\App\Models\Category::where('footer_link', true)->with('subcategories')->orderBy('name')->get() as $category)
+                            @if ((!$category->has_children && $category->pages->isEmpty()) || (!$category->isValidNavLink()))
+                                @continue
+                            @endif
+
+                            <div class="col-12 col-md-6 col-lg-4 mt-5 mt-md-0 ">
+                                <div class="foot-contact ">
+                                    @if ($category->has_children && $category->subcategories->isNotEmpty())
+                                    <h2>{{ $category->name }}</h2>
+                                    <ul>
+                                    @foreach($category->subcategories()->where('footer_link', true)->get() as $subcategory)
+                                        @if($subcategory->pages->isNotEmpty())
+                                        <li>
+                                            @if($subcategory->multiple_pages)
+                                            <a href="{{ route('subcategory.pages', ['categorySlug' => $category->slug, 'subCatSlug' => $subcategory->slug]) }}">
+                                                <i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i>
+                                                <span>{{ $subcategory->name }}</span>
+                                            </a>
+                                            @else
+                                            <a href="{{ route('subcategory.page', ['categorySlug' => $category->slug, 'subCatSlug' => $subcategory->slug, 'pageSlug' => $subcategory->pages()->first()->slug]) }}">
+                                                <i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i>
+                                                <span>{{ $subcategory->name }}</span>
+                                            </a>
+                                            @endif
+                                        </li>
+                                        @endif
+                                    @endforeach
+                                    </ul>
+
+                                    @else
+                                        @if($category->pages->isNotEmpty())
+                                            <h2>
+                                            @if ($category->multiple_pages)
+                                                <a href="{{ route('category.pages', $category->slug) }}">
+                                                    {{ $category->name }}
+                                                </a>
+                                            @else
+                                                <a href="{{ route('category.page', ['categorySlug' => $category->slug, 'pageSlug' => $category->pages->first()->slug]) }}">
+                                                    {{ $category->name }}
+                                                </a>
+                                            @endif
+                                            </h2>
+                                        @endif
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
+
                         <div class="col-12 col-md-6 col-lg-4 mt-5 mt-md-0 ">
                             <div class="foot-contact ">
                                 <h2>Contact</h2>
@@ -168,16 +229,6 @@
                                 </ul>
                             </div>
                         </div>
-                        <!--
-                            <div class="subscribe-form">
-                                <form class="d-flex flex-wrap align-items-center">
-                                    <input type="email" placeholder="Your email">
-                                    <input type="submit" value="send">
-                                </form>
-                            </div>
-                            -->
-
-
                     </div>
                 </div>
             </div>
@@ -200,31 +251,8 @@
 
         
         @yield('page-specific-js')
-        <script>
-            (function($) { // Begin jQuery
-              $(function() { // DOM ready
-                // If a link has a dropdown, add sub menu toggle.
-                $('nav ul li a:not(:only-child)').click(function(e) {
-                  $(this).siblings('.nav-dropdown').toggle();
-                  // Close one dropdown when selecting another
-                  $('.nav-dropdown').not($(this).siblings()).hide();
-                  e.stopPropagation();
-                });
-                // Clicking away from dropdown will remove the dropdown class
-                $('html').click(function() {
-                  $('.nav-dropdown').hide();
-                });
-                // Toggle open and close nav styles on click
-                $('#nav-toggle').click(function() {
-                  $('nav ul').slideToggle();
-                });
-                // Hamburger to X toggle
-                $('#nav-toggle').on('click', function() {
-                  this.classList.toggle('active');
-                });
-              }); // end DOM ready
-            })(jQuery); // end jQuery
-        </script>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="{{url('js/jquery-ui-1.8.2.custom.min.js')}}"></script>
         <script src="{{url('js/pirobox_extended.js')}}"></script>
         <script src="{{url('js/resource_script.js')}}"></script>

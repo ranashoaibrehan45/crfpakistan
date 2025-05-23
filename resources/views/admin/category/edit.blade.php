@@ -22,10 +22,21 @@
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
-                        <!-- Remember Me -->
-                        <div class="block mt-4">
+                        <div class="block mt-5 pt-4">
+                            <label for="header_link" class="inline-flex items-center">
+                                <input name="header_link" id="header_link" type="checkbox" value="1" @checked($category->header_link) class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Is Header Link') }}</span>
+                            </label>
+                            <label for="footer_link" class="inline-flex items-center">
+                                <input name="footer_link" id="footer_link" type="checkbox" value="1" @checked($category->footer_link) class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Is Footer Link') }}</span>
+                            </label>
+                            <label for="multiple_pages" class="inline-flex items-center">
+                                <input id="multiple_pages" name="multiple_pages" type="checkbox" value="1" @checked($category->multiple_pages) class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Has Multiple Pages') }}</span>
+                            </label>
                             <label for="has_children" class="inline-flex items-center">
-                                <input id="has_children" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="has_children">
+                                <input id="has_children" name="has_children" type="checkbox" @checked($category->has_children) class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                                 <span class="ms-2 text-sm text-gray-600">{{ __('Has Sub-Categories') }}</span>
                             </label>
                         </div>

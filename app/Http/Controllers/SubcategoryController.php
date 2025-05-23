@@ -36,7 +36,7 @@ class SubcategoryController extends Controller
      */
     public function store(SubcategoryRequest $request)
     {
-        $data = $request->validated();
+        $data = $request->all();
         $data['slug'] = Str::slug($data['name'], '-');
 
         Subcategory::create($data);
@@ -71,6 +71,12 @@ class SubcategoryController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($data['name'], '-');
+
+        $data['header_link'] = $request->has('header_link');
+        $data['footer_link'] = $request->has('footer_link');
+        $data['multiple_pages'] = $request->has('multiple_pages');
+
+        $subcategory->update($data);
 
         return redirect()->back()->with('status', 'Sub-Category updated successfully.');
     }

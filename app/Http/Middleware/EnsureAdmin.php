@@ -18,7 +18,7 @@ class EnsureAdmin
         $user = $request->user();
 
         if (! $user || $user->role !== 'admin') {
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         }
 
         return $next($request);

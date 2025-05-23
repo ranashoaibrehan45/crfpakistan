@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->string('name');
             $table->string('slug')->nullable();
+            $table->boolean('header_link')->default(false);
+            $table->boolean('footer_link')->default(false);
+            $table->boolean('multiple_pages')->default(false);
             $table->softDeletes();
         });
     }

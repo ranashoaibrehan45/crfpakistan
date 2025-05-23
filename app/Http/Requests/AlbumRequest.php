@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CategoryRequest extends FormRequest
+class AlbumRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,16 @@ class CategoryRequest extends FormRequest
     {
         $rules = [
             'name' => ['required', 'string', 'unique:categories,name'],
-            'has_children' => ['nullable'],
+            'icon' => ['required', 'image'],
         ];
 
         if (request()->isMethod('put')) {
             $rules = [
+                'icon' => ['nullable', 'image'],
                 'name' => [
                     'required',
                     'string',
-                    Rule::unique('categories')->ignore(request('category')),
+                    Rule::unique('albums')->ignore(request('album')),
                 ],
             ];
         }

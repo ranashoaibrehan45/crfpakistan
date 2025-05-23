@@ -23,17 +23,51 @@ class PageRequest extends FormRequest
     {
         $rules = [
             'category_id' => ['required'],
-            'subcategory_id' => ['required', 'unique:pages'],
+            'subcategory_id' => ['required', 'unique:pages,subcategory_id'],
             'meta_tags' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:255'],
             'tags' => ['nullable', 'string', 'max:255'],
-            'title' => ['required', 'string', 'unique:pages'],
+            'title' => ['required', 'string', 'unique:pages,title'],
             'content' => ['required'],
         ];
 
-        if (request()->isMethod('put')) {
-            $rules['subcategory_id'] = ['required', 'unique:pages,subcategory_id,'.request('page')->id.',id'];
-            $rules['title'] = ['required', 'string', 'unique:pages,title,'.request('page')->id.',id'];
+        if ($this->filled('category_id')) {
+            $category = \App\Models\Category::find($this->category_id);
+
+            if ($category && ! $category->has_children) {
+                $rules['subcategory_id'] = ['nullable'];
+
+                if (! $category->multiple_pages) {
+                    $rules['category_id'] = ['required', 'unique:pages,category_id'];
+                }
+
+                if ($this->isMethod('put')) {
+                    $rules['category_id'] = [
+                        'required',
+                        Rule::unique('pages', 'category_id')->ignore($this->page->id ?? null),
+                    ];
+                }
+            } else {
+                $subcategory = \App\Models\Subcategory::find($this->subcategory_id);
+                if ($subcategory) {
+                    if ($subcategory->multiple_pages) {
+                        $rules['subcategory_id'] = ['required'];
+                    } elseif ($this->isMethod('put')) {
+                        $rules['subcategory_id'] = [
+                            'required',
+                            Rule::unique('pages', 'subcategory_id')->ignore($this->page->id ?? null),
+                        ];
+                    }
+                }
+            }
+        }
+
+        if ($this->isMethod('put')) {
+            $rules['title'] = [
+                'required',
+                'string',
+                Rule::unique('pages', 'title')->ignore($this->page->id ?? null),
+            ];
         }
 
         return $rules;

@@ -31,7 +31,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $data = $request->validated();
+        $data = $request->all();
         $data['slug'] = Str::slug($data['name'], '-');
         $data['has_children'] = $request->has('has_children'); // returns true/false
 
@@ -63,7 +63,11 @@ class CategoryController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($data['name'], '-');
-        $data['has_children'] = $request->has('has_children'); // returns true/false
+
+        $data['header_link'] = $request->has('header_link');
+        $data['footer_link'] = $request->has('footer_link');
+        $data['has_children'] = $request->has('has_children');
+        $data['multiple_pages'] = $request->has('multiple_pages');
 
         $category->update($data);
 

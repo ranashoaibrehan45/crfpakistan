@@ -22,20 +22,19 @@
                         </div>
 
                         <!-- Type -->
-                        <div class="block mt-4">
-                            <x-input-label for="name" :value="__('Type')" class="mb-3" />
-                            <label for="header" class="inline-flex items-center">
-                                <input name="type" id="header" type="radio" value="header" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                                <span class="ms-2 text-sm text-gray-600">{{ __('Header') }}</span>
+                        <div class="block mt-5 pt-4">
+                            <label for="header_link" class="inline-flex items-center">
+                                <input name="header_link" id="header_link" type="checkbox" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Is Header Link') }}</span>
                             </label>
-                            <label for="footer" class="inline-flex items-center">
-                                <input name="type" id="footer" type="radio" value="footer" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                                <span class="ms-2 text-sm text-gray-600">{{ __('Footer') }}</span>
+                            <label for="footer_link" class="inline-flex items-center">
+                                <input name="footer_link" id="footer_link" type="checkbox" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Is Footer Link') }}</span>
                             </label>
-                        </div>
-
-                        <div class="block mt-4">
-                            <x-input-label for="name" :value="__('Has Children')" class="mb-3" />
+                            <label for="multiple_pages" class="inline-flex items-center">
+                                <input id="multiple_pages" name="multiple_pages" type="checkbox" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Has Multiple Pages') }}</span>
+                            </label>
                             <label for="has_children" class="inline-flex items-center">
                                 <input id="has_children" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="has_children">
                                 <span class="ms-2 text-sm text-gray-600">{{ __('Has Sub-Categories') }}</span>

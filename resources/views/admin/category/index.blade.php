@@ -17,6 +17,9 @@
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Name</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Slug</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Has Children</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Header</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Footer</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Multiple Page</th>
                                 <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700">Actions</th>
                             </tr>
                         </thead>
@@ -26,11 +29,14 @@
                                     <td class="px-6 py-4 text-sm text-gray-900">{{ $category->name }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-500">{{ $category->slug }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-500">{{ $category->has_children ? 'Yes' : 'No' }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">{{ $category->header_link ? 'True' : 'False' }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">{{ $category->footer_link ? 'True' : 'False' }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">{{ $category->multiple_pages ? 'True' : 'False' }}</td>
                                     <td class="px-6 py-4 text-sm text-right space-x-2">
                                         <a href="{{ route('admin.category.edit', $category->id) }}"
                                             class="inline-flex items-center px-3 py-1 text-sm text-white bg-gray-800 hover:bg-blue-700 rounded border border-black">
-                                                Edit
-                                            </a>
+                                            Edit
+                                        </a>
                                         <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure?');">
                                             @csrf
                                             @method('DELETE')

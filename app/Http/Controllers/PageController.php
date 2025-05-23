@@ -27,8 +27,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('has_children', true)
-            ->orderBy('name')
+        $categories = Category::orderBy('name')
             ->get();
 
         $subcategories = Subcategory::orderBy('name')->get();
@@ -63,11 +62,39 @@ class PageController extends Controller
     /**
      * show page on front end
      */
-    public function showPage($slug)
+    public function catPage($categorySlug, $pageSlug)
     {
-        $page = Page::where('slug', $slug)->firstOrFail();
+        $page = Page::where('slug', $pageSlug)->firstOrFail();
 
         return view('page', compact('page'));
+    }
+
+    /**
+     * show page on front end
+     */
+    public function subcatPage($categorySlug, $subCatSlug, $pageSlug)
+    {
+        $page = Page::where('slug', $pageSlug)->firstOrFail();
+
+        return view('page', compact('page'));
+    }
+
+    /**
+     * show pages on front end
+     *
+     * @param  $slug  subcategory slug
+     */
+    public function showPages($categorySlug, $subCatSlug = null)
+    {
+        if ($subCatSlug) {
+            $subcategory = Subcategory::where('slug', $subCatSlug)->first();
+            $pages = $subcategory->pages;
+        } else {
+            $category = Category::where('slug', $categorySlug)->first();
+            $pages = $category->pages;
+        }
+
+        return view('pages-list', compact('pages'));
     }
 
     /**
@@ -75,8 +102,7 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        $categories = Category::where('has_children', true)
-            ->orderBy('name')
+        $categories = Category::orderBy('name')
             ->get();
 
         $subcategories = Subcategory::orderBy('name')->get();
@@ -115,7 +141,6 @@ class PageController extends Controller
      */
     public function upload(Request $request)
     {
-        \Log::info(print_r($request->all(), true));
         try {
             if ($request->hasFile('image')) {
                 $file = $request->file('image');

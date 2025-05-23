@@ -18,7 +18,7 @@
                         <div>
                             <x-input-label for="category_id" :value="__('Category')" />
                             <select name="category_id" class="block w-full mt-1 px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-                                <option value="category_id">--Choose Category--</option>
+                                <option value="">--Choose Category--</option>
                                 
                                 @foreach($categories as $category)
                                 <option value="{{ $category->id }}" @selected($category->id == $subcategory->id)>{{ $category->name }}</option>
@@ -32,6 +32,21 @@
                             <x-input-label for="name" :value="__('Name')" />
                             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name', $subcategory->name)" required autofocus autocomplete="name" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        </div>
+
+                        <div class="block mt-5 pt-4">
+                            <label for="header_link" class="inline-flex items-center">
+                                <input name="header_link" id="header_link" type="checkbox" value="1" @checked($subcategory->header_link) class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Is Header Link') }}</span>
+                            </label>
+                            <label for="footer_link" class="inline-flex items-center">
+                                <input name="footer_link" id="footer_link" type="checkbox" value="1" @checked($subcategory->footer_link) class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Is Footer Link') }}</span>
+                            </label>
+                            <label for="multiple_pages" class="inline-flex items-center">
+                                <input id="multiple_pages" name="multiple_pages" type="checkbox" value="1" @checked($subcategory->multiple_pages) class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Has Multiple Pages') }}</span>
+                            </label>
                         </div>
 
                         <div class="flex items-center justify-end mt-4">                        

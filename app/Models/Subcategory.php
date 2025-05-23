@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Category\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subcategory extends Model
@@ -17,6 +17,15 @@ class Subcategory extends Model
         'category_id',
         'name',
         'slug',
+        'header_link',
+        'footer_link',
+        'multiple_pages',
+    ];
+
+    protected $casts = [
+        'footer_link' => 'boolean',
+        'footer_link' => 'boolean',
+        'multiple_pages' => 'boolean',
     ];
 
     /**
@@ -28,10 +37,10 @@ class Subcategory extends Model
     }
 
     /**
-     * Get the page associated with the Subcategory
+     * Get all of the pages for the Subcategory
      */
-    public function page(): HasOne
+    public function pages(): HasMany
     {
-        return $this->hasOne(Page::class);
+        return $this->hasMany(Page::class);
     }
 }

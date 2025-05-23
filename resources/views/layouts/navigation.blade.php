@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('admin.page.index')" :active="request()->routeIs('admin.page.*')">
                         {{ __('Pages') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.album.index')" :active="request()->routeIs('admin.album.*')">
+                        {{ __('Album') }}
+                    </x-nav-link>
                 </div>
             </div>
 

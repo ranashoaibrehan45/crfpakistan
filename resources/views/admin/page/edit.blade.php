@@ -19,7 +19,7 @@
                         <div>
                             <x-input-label for="category_id" :value="__('Category')" />
                             <select name="category_id" id="category_id" class="block w-full mt-1 px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-                                <option value="category_id">--Choose Category--</option>
+                                <option value="">--Choose Category--</option>
                                 
                                 @foreach($categories as $category)
                                 <option value="{{ $category->id }}" @selected(old('category_id', $page->category->id) == $category->id)>{{ $category->name }}</option>
@@ -31,7 +31,7 @@
                         <div class="mt-3">
                             <x-input-label for="category_id" :value="__('Sub Category')" />
                             <select name="subcategory_id" id="subcategory_id" class="block w-full mt-1 px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-                                <option value="category_id">--Choose Subcategory--</option>                                
+                                <option value="">--Choose Subcategory--</option>                                
                             </select>
                             <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
                         </div>

@@ -14,16 +14,24 @@
                     <table class="w-full divide-y divide-gray-200 shadow rounded-lg">
                         <thead class="bg-gray-100">
                             <tr>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Category</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Name</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Slug</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Header</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Footer</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Multiple Page</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($subcategories as $subcategory)
                                 <tr>
+                                    <td class="px-6 py-4 text-sm text-gray-900">{{ $subcategory->category->name }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-900">{{ $subcategory->name }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-500">{{ $subcategory->slug }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">{{ $subcategory->header_link ? 'True' : 'False' }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">{{ $subcategory->footer_link ? 'True' : 'False' }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-500">{{ $subcategory->multiple_pages ? 'True' : 'False' }}</td>
                                     <td class="px-6 py-4 text-sm text-right space-x-2">
                                         <a href="{{ route('admin.subcategory.edit', $subcategory->id) }}"
                                             class="inline-flex items-center px-3 py-1 text-sm text-white bg-gray-800 hover:bg-blue-700 rounded border border-black">

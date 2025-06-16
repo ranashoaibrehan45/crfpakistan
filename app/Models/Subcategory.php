@@ -20,6 +20,7 @@ class Subcategory extends Model
         'header_link',
         'footer_link',
         'multiple_pages',
+        'has_children',
     ];
 
     protected $casts = [
@@ -42,5 +43,13 @@ class Subcategory extends Model
     public function pages(): HasMany
     {
         return $this->hasMany(Page::class);
+    }
+
+    /**
+     * Get all of the morecategories belongs to subcategory
+     */
+    public function moreCategory(): HasMany
+    {
+        return $this->hasMany(Morecategory::class);
     }
 }

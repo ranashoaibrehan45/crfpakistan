@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subcategories', function (Blueprint $table) {
+        Schema::create('morecategories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('subcategory_id')->constrained();
             $table->string('name');
             $table->string('slug')->nullable();
             $table->boolean('header_link')->default(false);
             $table->boolean('footer_link')->default(false);
             $table->boolean('multiple_pages')->default(false);
-            $table->boolean('has_children')->default(false);
             $table->softDeletes();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subcategories');
+        Schema::dropIfExists('morecategories');
     }
 };

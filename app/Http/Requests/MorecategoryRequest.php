@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class SubcategoryRequest extends FormRequest
+class MorecategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,18 @@ class SubcategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $subcategoryId = request('subcategory_id');
+
+        $morecategoryId = request('morecategory');
+
         $rules = [
-            'category_id' => ['required'],
-            'has_children' => ['nullable'],
-            'name' => ['required', 'string', 'unique:subcategories'],
+            'subcategory_id' => ['required'],
+            'name' => [
+                'required',
+                'string',
+                Rule::unique('morecategories')
+                    ->where(fn ($query) => $query->where('subcategory_id', $subcategoryId)),
+            ],
         ];
 
         if (request()->isMethod('put')) {
@@ -33,7 +41,9 @@ class SubcategoryRequest extends FormRequest
                 'name' => [
                     'required',
                     'string',
-                    Rule::unique('subcategories')->ignore(request('subcategory')),
+                    Rule::unique('morecategories')
+                        ->where(fn ($query) => $query->where('subcategory_id', $subcategoryId))
+                        ->ignore($morecategoryId),
                 ],
             ];
         }

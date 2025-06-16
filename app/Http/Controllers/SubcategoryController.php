@@ -38,6 +38,7 @@ class SubcategoryController extends Controller
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['name'], '-');
+        $data['has_children'] = $request->has('has_children');
 
         Subcategory::create($data);
 
@@ -75,6 +76,7 @@ class SubcategoryController extends Controller
         $data['header_link'] = $request->has('header_link');
         $data['footer_link'] = $request->has('footer_link');
         $data['multiple_pages'] = $request->has('multiple_pages');
+        $data['has_children'] = $request->has('has_children');
 
         $subcategory->update($data);
 

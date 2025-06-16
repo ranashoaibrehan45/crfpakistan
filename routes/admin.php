@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\MorecategoriesController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('category', CategoryController::class);
     Route::resource('subcategory', SubcategoryController::class);
+    Route::resource('morecategory', MorecategoriesController::class);
     Route::resource('page', PageController::class);
     Route::resource('album', AlbumController::class);
     Route::resource('gallery', GalleryController::class);

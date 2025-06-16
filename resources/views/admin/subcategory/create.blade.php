@@ -47,6 +47,10 @@
                                 <input id="multiple_pages" name="multiple_pages" type="checkbox" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                                 <span class="ms-2 text-sm text-gray-600">{{ __('Has Multiple Pages') }}</span>
                             </label>
+                            <label for="has_children" class="inline-flex items-center">
+                                <input id="has_children" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="has_children">
+                                <span class="ms-2 text-sm text-gray-600">{{ __('Has Sub-Categories') }}</span>
+                            </label>
                         </div>
 
                         <div class="flex items-center justify-end mt-4">                        

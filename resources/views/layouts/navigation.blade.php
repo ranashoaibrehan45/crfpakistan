@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('admin.subcategory.index')" :active="request()->routeIs('admin.subcategory.*')">
                         {{ __('Sub Categories') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.morecategory.index')" :active="request()->routeIs('admin.morecategory.*')">
+                        {{ __('More Categories') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.page.index')" :active="request()->routeIs('admin.page.*')">
                         {{ __('Pages') }}
                     </x-nav-link>

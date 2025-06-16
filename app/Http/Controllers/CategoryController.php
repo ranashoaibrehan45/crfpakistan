@@ -33,7 +33,7 @@ class CategoryController extends Controller
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['name'], '-');
-        $data['has_children'] = $request->has('has_children'); // returns true/false
+        $data['has_children'] = $request->has('has_children');
 
         Category::create($data);
 

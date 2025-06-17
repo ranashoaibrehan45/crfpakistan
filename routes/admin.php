@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MorecategoriesController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('page', PageController::class);
     Route::resource('album', AlbumController::class);
     Route::resource('gallery', GalleryController::class);
+    Route::resource('image', ImageController::class);
 
-    Route::post('editor/upload', [PageController::class, 'upload'])->name('ckeditor.upload');
+    Route::post('editor/upload', [PageController::class, 'upload'])->name('editor.upload');
 });

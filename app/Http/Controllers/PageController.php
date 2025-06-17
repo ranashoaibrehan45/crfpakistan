@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PageRequest;
 use App\Models\Category;
+use App\Models\Morecategory;
 use App\Models\Page;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
@@ -31,10 +32,12 @@ class PageController extends Controller
             ->get();
 
         $subcategories = Subcategory::orderBy('name')->get();
+        $morecategories = Morecategory::orderBy('name')->get();
 
         return view('admin.page.create', [
             'categories' => $categories,
             'subcategories' => $subcategories,
+            'morecategories' => $morecategories,
         ]);
     }
 

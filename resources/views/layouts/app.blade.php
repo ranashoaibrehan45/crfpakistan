@@ -19,6 +19,7 @@
         <style>
             .text-left {text-align: left;}
         </style>
+        @yield('header_style')
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

@@ -30,6 +30,9 @@
                     <x-nav-link :href="route('admin.album.index')" :active="request()->routeIs('admin.album.*')">
                         {{ __('Album') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.image.index')" :active="request()->routeIs('admin.album.*')">
+                        {{ __('Images') }}
+                    </x-nav-link>
                 </div>
             </div>
 

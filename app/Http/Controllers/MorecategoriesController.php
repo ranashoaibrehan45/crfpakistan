@@ -78,8 +78,10 @@ class MorecategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(MorecategoryRequest $request, Morecategory $morecategories)
+    public function update(MorecategoryRequest $request, $morecategories)
     {
+        $morecategories = Morecategory::findOrFail($morecategories);
+
         $data = $request->validated();
         $data['slug'] = Str::slug($data['name'], '-');
 
@@ -95,9 +97,10 @@ class MorecategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Morecategory $morecategories)
+    public function destroy($id)
     {
-        if ($morecategories->delete()) {
+        $morecategory = Morecategory::findOrFail($id);
+        if ($morecategory->delete()) {
             return back()->with('status', 'Sub-SubCategory deleted successfully!');
         }
 

@@ -13,6 +13,7 @@ class Page extends Model
     protected $fillable = [
         'category_id',
         'subcategory_id',
+        'morecategory_id',
         'meta_tags',
         'meta_description',
         'title',

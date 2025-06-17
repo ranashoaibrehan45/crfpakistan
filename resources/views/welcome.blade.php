@@ -1,100 +1,99 @@
 @extends('layouts.front')
-@section('content')
 
-            
-            <div id="demo" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                    <li data-target="#demo" data-slide-to="3"></li>
-                    <li data-target="#demo" data-slide-to="4"></li>
-                    <li data-target="#demo" data-slide-to="5"></li>
-                    <li data-target="#demo" data-slide-to="6"></li>
-                </ul>
+@section('content')            
+    <div id="demo" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+            <li data-target="#demo" data-slide-to="3"></li>
+            <li data-target="#demo" data-slide-to="4"></li>
+            <li data-target="#demo" data-slide-to="5"></li>
+            <li data-target="#demo" data-slide-to="6"></li>
+        </ul>
                 
-                <!-- The slideshow -->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100 " src="{{url('images/slider/slider1.jpg')}} " alt="First slide ">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 " src="{{url('images/slider/slider2.jpg')}} " alt="Second slide ">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100 " src="{{url('images/slider/slider3.jpg')}} " alt="Third slide ">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="images/slider/slider4.jpg" alt="4th slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="images/slider/slider5.jpg" alt=57th slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="images/slider/slider6.jpg" alt="6th slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="images/slider/slider7.jpg" alt="7th slide">
-                    </div>
-                </div>
-                
-                <!-- Left and right controls -->
-                <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100 " src="{{url('images/slider/slider1.jpg')}} " alt="First slide ">
             </div>
+            <div class="carousel-item">
+                <img class="d-block w-100 " src="{{url('images/slider/slider2.jpg')}} " alt="Second slide ">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100 " src="{{url('images/slider/slider3.jpg')}} " alt="Third slide ">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/slider/slider4.jpg" alt="4th slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/slider/slider5.jpg" alt=57th slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/slider/slider6.jpg" alt="6th slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/slider/slider7.jpg" alt="7th slide">
+            </div>
+        </div>
         
-            <div class="row " style="padding:15px; ">
-               <div class="col-12 col-md-6 col-lg-4 mt-4 mt-lg-0 ">
-                     <a href="# ">
-                         <div class="icon-box ">
-                             
-                        <header class="entry-header " line-height='1'>
-                            <br>
-                            <h3 class="entry-title ">Projects & Activities</h3>
-                        </header>
-                        <div class="entry-content ">
-                        <br> 
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4 mt-4 mt-lg-0 ">
-                     <a href="# ">
-                         <div class="icon-box ">
-                             
-                        <header class="entry-header ">
-                            <br>
-                            <h3 class="entry-title ">Working Group for inclusive Education</h3>
-                        </header>
-                        <div class="entry-content ">
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+        
+    <div class="row " style="padding:15px; ">
+        <div class="col-12 col-md-6 col-lg-4 mt-4 mt-lg-0 ">
+                <a href="# ">
+                    <div class="icon-box ">
                         
-                        </div>
-                    </div>
-                    </a>
+                <header class="entry-header " line-height='1'>
+                    <br>
+                    <h3 class="entry-title ">Projects & Activities</h3>
+                </header>
+                <div class="entry-content ">
+                <br> 
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 mt-4 mt-lg-0 ">
-                     <a href="# ">
-                         <div class="icon-box ">
-                             
-                        <header class="entry-header ">
-                            <br>
-                            <h3 class="entry-title ">Resources</h3>
-                        </header>
-                        <div class="entry-content ">
-                        <br> 
-                        </div>
-                    </div>
-                    </a>
+            </div>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mt-4 mt-lg-0 ">
+                <a href="# ">
+                    <div class="icon-box ">
+                        
+                <header class="entry-header ">
+                    <br>
+                    <h3 class="entry-title ">Working Group for inclusive Education</h3>
+                </header>
+                <div class="entry-content ">
+                
                 </div>
-                 
-            </div><!-- .row -->
-        </div><!-- .container -->
-    </div><!-- .home-page-icon-boxes -->
+            </div>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mt-4 mt-lg-0 ">
+                <a href="# ">
+                    <div class="icon-box ">
+                        
+                <header class="entry-header ">
+                    <br>
+                    <h3 class="entry-title ">Resources</h3>
+                </header>
+                <div class="entry-content ">
+                <br> 
+                </div>
+            </div>
+            </a>
+        </div>
+            
+    </div><!-- .row -->
+</div><!-- .container -->
+</div><!-- .home-page-icon-boxes -->
 
     <div class="home-page-welcome ">
         

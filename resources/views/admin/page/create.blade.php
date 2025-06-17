@@ -1,4 +1,8 @@
 <x-app-layout>
+    @section('header_style')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.css" rel="stylesheet">
+    @endsection
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Add Category') }}
@@ -28,11 +32,19 @@
                         </div>
 
                         <div class="mt-3">
-                            <x-input-label for="category_id" :value="__('Sub Category')" />
+                            <x-input-label for="subcategory_id" :value="__('Parent Category')" />
                             <select name="subcategory_id" id="subcategory_id" class="block w-full mt-1 px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-                                <option value="">--Choose Subcategory--</option>                                
+                                <option value="">--Parent Category--</option>                                
                             </select>
                             <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
+                        </div>
+
+                        <div class="mt-3">
+                            <x-input-label for="morecategory_id" :value="__('Sub Category')" />
+                            <select name="morecategory_id" id="morecategory_id" class="block w-full mt-1 px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm">
+                                <option value="">--Subcategory--</option>                                
+                            </select>
+                            <x-input-error :messages="$errors->get('morecategory_id')" class="mt-2" />
                         </div>
 
                         <!-- Name -->
@@ -45,9 +57,7 @@
                         <!-- Content -->
                         <div class="mt-3">
                             <x-input-label for="content" :value="__('Content')" />
-                            <div id="editor" style="height: 300px;"></div>
-                            <input type="hidden" name="content" id="content">
-                            
+                            <textarea id="editor" name="content" id="content">{{ old('content') }}</textarea>                            
                             <x-input-error :messages="$errors->get('content')" class="mt-2" />
                         </div>
 
@@ -62,11 +72,12 @@
         </div>
     </div>
 
-    @section('footer_script')
-    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    @section('footer_script')    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.js"></script>
     <script>
-        const subcategories = @json($subcategories);
-        const oldCat = parseInt("{{ old('category_id') }}");
+        const subcategories     = @json($subcategories);
+        const morecategories    = @json($morecategories);
+        const oldCat            = parseInt("{{ old('category_id') }}");
 
         function subcatOption(categoryId) {
             const filteredSubcategories = subcategories.filter(sc => sc.category_id == categoryId);
@@ -79,6 +90,17 @@
             $('#subcategory_id').html(options);
         }
 
+        function morecatOption(subcategoryId) {
+            const filteredSubcategories = morecategories.filter(sc => sc.subcategory_id == subcategoryId);
+
+            let options = '<option value="">-- Subcategory --</option>';
+            filteredSubcategories.forEach(sc => {
+                options += `<option value="${sc.id}">${sc.name}</option>`;
+            });
+
+            $('#morecategory_id').html(options);
+        }
+
         if (oldCat > 0) {
             subcatOption(oldCat);
             $("#subcategory_id").val(oldCat);
@@ -87,20 +109,59 @@
         $('#category_id').on('change', function () {
             subcatOption($(this).val());
         });
+        $('#subcategory_id').on('change', function () {
+            morecatOption($(this).val());
+        });
 
 
         $(document).ready(function() {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-            const quill = new Quill('#editor', {
+            $('#editor').summernote({
+                height: 300,                 // Set editor height
+                placeholder: 'Write your content here...',
+                callbacks: {
+                    onImageUpload: function(files) {
+                        uploadImage(files[0]);
+                    }
+                }
+            });
+
+            function uploadImage(file) {
+                let data = new FormData();
+                data.append("image", file);
+                $.ajax({
+                    url: '{{ route("admin.editor.upload") }}',
+                    method: "POST",
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                        $('#editor').summernote('insertImage', response.url);
+                    },
+                    error: function(data) {
+                        console.log(data);
+                        alert("Image upload failed");
+                    }
+                });
+            }
+            
+            /*const quill = new Quill('#editor', {
                 theme: 'snow',
                 modules: {
                     toolbar: {
                         container: [
                             [{ header: [1, 2, false] }],
-                            ['bold', 'italic', 'underline'],
-                            ['image', 'code-block'],
-                            [{ list: 'ordered' }, { list: 'bullet' }],
-                            ['link']
+                            ['bold', 'italic', 'underline','strike'],
+                            ['link', 'image', 'video', 'code-block'],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+                            //['link']
+                            [{ 'color': [] }, { 'background': [] }],
+                            [{ 'font': [] }],
+                            [{ 'align': [] }],
+                            ['clean']
                         ],
                         handlers: {
                             image: function () {
@@ -132,7 +193,7 @@
                         }
                     }
                 }
-            });
+            });*/
             
             $("#form").submit(function() {
                 $("#content").val(quill.root.innerHTML);

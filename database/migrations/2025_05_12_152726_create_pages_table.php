@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained();
-            $table->foreignId('subcategory_id')->constrained();
+            $table->bigInteger('subcategory_id')->nullable();
+            $table->bigInteger('morecategory_id')->nullable();
             $table->string('meta_tags')->nullable();
             $table->string('meta_description')->nullable();
             $table->string('title');

@@ -23,7 +23,8 @@ class PageRequest extends FormRequest
     {
         $rules = [
             'category_id' => ['required'],
-            'subcategory_id' => ['required', 'unique:pages,subcategory_id'],
+            'subcategory_id' => ['nullable'],
+            'morecategory_id' => ['nullable', 'unique:pages,morecategory_id'],
             'meta_tags' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:255'],
             'tags' => ['nullable', 'string', 'max:255'],

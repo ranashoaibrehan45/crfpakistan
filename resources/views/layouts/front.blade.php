@@ -89,57 +89,76 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ url('/') }}">Home</a>
                             </li>
-
-                            @foreach(\App\Models\Category::where('header_link', true)->with('subcategories')->orderBy('name')->get() as $category)
-                                 @if ((!$category->has_children && $category->pages->isEmpty()) || (!$category->isValidNavLink()))
+                            @foreach(\App\Models\Category::where('header_link', true)->with('subcategories.moreCategory.pages')->orderBy('name')->get() as $category)
+                                @if((!$category->has_children && $category->pages->isEmpty()) || !$category->isValidNavLink())
                                     @continue
                                 @endif
-                                
-                                @if ($category->has_children && $category->subcategories->isNotEmpty())
-                                    <li class="nav-item dropdown">
-                                        <a href="#" 
-                                            class="nav-link dropdown-toggle" 
-                                            data-toggle="dropdown"
-                                        >
-                                            {{ $category->name }}
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            @foreach($category->subcategories()->where('header_link', true)->get() as $subcategory)
-                                                @if($subcategory->multiple_pages && $subcategory->pages->isNotEmpty())
-                                                    <a class="dropdown-item no-caret" href="{{ route('subcategory.pages', ['categorySlug' => $category->slug, 'subCatSlug' => $subcategory->slug]) }}">
-                                                        {{ $subcategory->name }}
-                                                    </a>
-                                                @elseif($subcategory->pages->isNotEmpty())
-                                                    <a class="dropdown-item no-caret" href="{{ route('subcategory.page', ['categorySlug' => $category->slug, 'subCatSlug' => $subcategory->slug, 'pageSlug' => $subcategory->pages()->first()->slug]) }}">
-                                                        {{ $subcategory->name }}
-                                                    </a>
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                    </li>
-                                @else
-                                    @if($category->pages->isNotEmpty())
-                                    <li class="nav-item">
-                                        @if ($category->multiple_pages)
+
+                                <li class="nav-item dropdown">
+                                    @if($category->pages->isNotEmpty())                            
+                                        @if (!$category->subcategories && $category->multiple_pages && $category->pages)
                                             <a class="dropdown-item no-caret" href="{{ route('category.pages', $category?->slug) }}">
                                                 {{ $category?->name }}
                                             </a>
-                                        @else
+                                        @elseif(!$category->subcategories && $category->pages)
                                             <a class="dropdown-item no-caret" href="{{ route('category.page', ['categorySlug' => $category->slug, 'pageSlug' => $category->pages->first()->slug]) }}">
                                                 {{ $category->name }}
                                             </a>
+                                        @else
+                                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                                {{ $category->name }}
+                                            </a>
                                         @endif
-                                    </li>
                                     @endif
-                                @endif
-                            @endforeach
+                                    
+                                    <div class="dropdown-menu">
+                                        @foreach($category->subcategories->where('header_link', true) as $subcategory)
+                                            @if($subcategory->moreCategory->isNotEmpty())
+                                                <div class="dropdown-submenu">
+                                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                                        {{ $subcategory->name }}
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        @foreach($subcategory->moreCategory as $morecat)
+                                                            @if($morecat->multiple_pages && $morecat->pages->isNotEmpty())
+                                                            <li>
+                                                                <a class="dropdown-item" href="{{ route('morecategory.pages', [
+                                                                    'categorySlug' => $category->slug,
+                                                                    'subCatSlug' => $subcategory->slug,
+                                                                    'moreCatSlug' => $morecat->slug,
+                                                                ]) }}">
+                                                                    {{ $morecat->name }}
+                                                                </a>
+                                                            </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('album') }}">Gallery</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('contact.create') }}">Contact Us</a>
-                            </li>
+                                                            @elseif($morecat->pages->isNotEmpty())
+                                                            <li>
+                                                                <a class="dropdown-item" href="{{ route('morecategory.page', [
+                                                                    'categorySlug' => $category->slug,
+                                                                    'subCatSlug' => $subcategory->slug,
+                                                                    'moreCatSlug' => $morecat->slug,
+                                                                    'pageSlug' => $morecat->pages->first()->slug
+                                                                ]) }}">
+                                                                    {{ $morecat->name }}
+                                                                </a>
+                                                            </li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @elseif($subcategory->multiple_pages && $subcategory->pages->isNotEmpty())
+                                                <a class="dropdown-item no-caret" href="{{ route('subcategory.pages', ['categorySlug' => $category->slug, 'subCatSlug' => $subcategory->slug]) }}">
+                                                    {{ $subcategory->name }}
+                                                </a>
+                                            @elseif($subcategory->pages->isNotEmpty())
+                                                <a class="dropdown-item no-caret" href="{{ route('subcategory.page', ['categorySlug' => $category->slug, 'subCatSlug' => $subcategory->slug, 'pageSlug' => $subcategory->pages()->first()->slug]) }}">
+                                                    {{ $subcategory->name }}
+                                                </a>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </nav>

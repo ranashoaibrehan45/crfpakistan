@@ -37,4 +37,12 @@ class Page extends Model
     {
         return $this->belongsTo(Subcategory::class);
     }
+
+    /**
+     * Get the morecategory that owns the Page
+     */
+    public function morecategory(): BelongsTo
+    {
+        return $this->belongsTo(Morecategory::class);
+    }
 }

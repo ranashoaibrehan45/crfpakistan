@@ -26,7 +26,10 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($morecategories as $subcategory)
                                 <tr>
-                                    <td class="px-6 py-4 text-sm text-gray-900">{{ $subcategory->subcategory->name }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-900">
+                                        {{ $subcategory->subcategory->name }} <br>
+                                        <small>{{ $subcategory->subcategory->category->name }}</small>
+                                    </td>
                                     <td class="px-6 py-4 text-sm text-gray-900">{{ $subcategory->name }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-500">{{ $subcategory->slug }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-500">{{ $subcategory->header_link ? 'True' : 'False' }}</td>

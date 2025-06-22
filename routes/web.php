@@ -32,4 +32,6 @@ Route::get('{categorySlug}/{subCatSlug}', [PageController::class, 'showPages'])-
 Route::get('{categorySlug}/post/{pageSlug}', [PageController::class, 'catPage'])->name('category.page');
 Route::get('{categorySlug}/{subCatSlug}/post/{pageSlug}', [PageController::class, 'subcatPage'])->name('subcategory.page');
 
+Route::get('{categorySlug}/{subCatSlug}/{moreCatSlug}', [PageController::class, 'showPages'])->name('morecategory.pages');
+Route::get('{categorySlug}/{subCatSlug}/{moreCatSlug}/post/{pageSlug}', [PageController::class, 'morecatPage'])->name('morecategory.page');
 // Route::get('pages/{type}/{slug}', [PageController::class, 'showPages'])->name('pages');

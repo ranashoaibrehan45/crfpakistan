@@ -83,13 +83,33 @@ class PageController extends Controller
     }
 
     /**
+     * show page on front end
+     */
+    public function morecatPage($categorySlug, $subCatSlug, $moreCatSlug, $pageSlug)
+    {
+        $page = Page::where('pages.slug', $pageSlug)
+            ->join('morecategories as mc', 'pages.morecategory_id', 'mc.id')
+            ->where('mc.slug', $moreCatSlug)
+            ->firstOrFail();
+
+        return view('page', compact('page'));
+    }
+
+    /**
      * show pages on front end
      *
      * @param  $slug  subcategory slug
      */
-    public function showPages($categorySlug, $subCatSlug = null)
+    public function showPages($categorySlug, $subCatSlug = null, $moreCatSlug = null)
     {
-        if ($subCatSlug) {
+        if ($moreCatSlug) {
+            $subcategory = Subcategory::where('slug', $subCatSlug)->firstOrFail();
+
+            $morecategory = Morecategory::where('slug', $moreCatSlug)
+                ->where('subcategory_id', $subcategory->id)
+                ->firstOrFail();
+            $pages = $subcategory->pages;
+        } elseif ($subCatSlug) {
             $subcategory = Subcategory::where('slug', $subCatSlug)->first();
             $pages = $subcategory->pages;
         } else {

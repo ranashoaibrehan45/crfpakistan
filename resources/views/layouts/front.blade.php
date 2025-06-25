@@ -159,6 +159,10 @@
                                     </div>
                                 </li>
                             @endforeach
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ url('album') }}">Gallery</a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -268,9 +272,6 @@
             </div>
         </footer>
 
-        
-        @yield('page-specific-js')
-        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="{{url('js/jquery-ui-1.8.2.custom.min.js')}}"></script>
         <script src="{{url('js/pirobox_extended.js')}}"></script>
@@ -281,5 +282,7 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+        @yield('page-specific-js')
     </body>
 </html>

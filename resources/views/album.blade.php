@@ -9,7 +9,7 @@
 <div class="container py-5">
     <div class="row">
         @foreach ($albums as $album)
-        <div class="card" style="width:200px">
+        <div class="card" style="width:200px; ">
             <img class="card-img-top" src="{{ url('storage/album/thumbnails/' . $album->icon) }}" alt="Card image">
             <div class="card-body text-center">
                 <h4 class="card-title">{{ $album->name }}</h4>

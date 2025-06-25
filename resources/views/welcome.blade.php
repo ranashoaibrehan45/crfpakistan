@@ -1,5 +1,9 @@
 @extends('layouts.front')
 
+@section('page-specific-css')
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+@endsection
+
 @section('content')            
     <div id="demo" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -135,37 +139,26 @@ To uplift and empower disadvantaged communities by providing access to welfare p
                             <h2 class="entry-title ">Publications</h2>
                         </div><!-- .section-heading -->
 
-                        <div class="cause-wrap approch d-flex flex-wrap justify-content-between ">
-                         <ul class="list-group ">
-                             
-                        <!-- .section-heading mrgin -->
-   <!--<span class="download "><a href=" ">Download Application Form Now!</a></span>--></li>
-  <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# ">Research reports and studies</a></li>
-  <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# ">Books</a></li>
-  <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# ">Position Papers / Pamphlets</a></li>
- 
-</ul>
-
-                           
+                        <div class="cause-wrap approch d-flex flex-wrap justify-content-between">
+                            <ul class="list-group ">                             
+                                <!-- .section-heading mrgin -->
+                                <!--<span class="download "><a href=" ">Download Application Form Now!</a></span>--></li>
+                                <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# ">Research reports and studies</a></li>
+                                <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# ">Books</a></li>
+                                <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# ">Position Papers / Pamphlets</a></li>                            
+                            </ul>                           
                         </div><!-- .cause-wrap -->
                     </div><!-- .featured-cause -->
                 </div><!-- .col -->
              
                 <div class="col-12 col-lg-6 ">
                     <div class="featured-cause ">
-                     <div class="cause-wrap approch d-flex flex-wrap justify-content-between mywrap1 ">
-                           <ul class="list-group ">
-                             
-                        <!-- .section-heading mrgin -->
-                               <!--<span class="download "><a href=" ">Download Application Form Now!</a></span>--></li>
-                              
-                              <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# " target="documentaries.php ">Documentaries</a></li>
-                              <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# " target="publications.php ">Publication with other organizations</a></li>
-                              <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# " target="newsletter.php "> Human rights observer / Newsletter</a></li>
-                             
-                            </ul>
-
-                           
+                        <div class="cause-wrap approch d-flex flex-wrap justify-content-between mywrap1 ">
+                            <ul class="list-group ">                                                             
+                              <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# " target="#">Documentaries</a></li>
+                              <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# " target="#">Publication with other organizations</a></li>
+                              <li class="list-group-item "><i class="fa fa-arrow-circle-o-right " aria-hidden="true "></i><a href="# " target="#"> Human rights observer / Newsletter</a></li>
+                            </ul>   
                         </div><!-- .cause-wrap -->
                     </div><!-- .featured-cause -->
                 </div><!-- .col -->
@@ -173,89 +166,90 @@ To uplift and empower disadvantaged communities by providing access to welfare p
         </div><!-- .container -->
     </div><!-- .home-page-events -->
 
-<div class="our-causes ">
+    <div class="our-causes ">
         <div class="container ">
             <div class="row ">
                 <div class="coL-12 ">
-                    <div class="section-heading ">
-                        
+                    <div class="section-heading ">                        
                         <h2 class="entry-title ">Join us on Social Media</h2>
                     </div>
                 </div>
             </div>
 
-            <div class="row ">
-                <div class="col-12 ">
-                    <div class="swiper-container causes-slider ">
-                        <div class="swiper-wrapper ">
-                            <div class="swiper-slide ">
-                                <div class="cause-wrap ">
-                                   <div class="cause-content-wrap ">
-                                       <div class="col-12 col-md-12 col-lg-12 mt-5 mt-md-0 ">
-                                        <div class="section-heading ">
-                                        <a href="# "style="color:#0099ff " style= "font-size:20px "  target="_blank ">
-                                            <img src="images/Tweeter.png " style="width:190px "style="height: 60px " style= "font-size:20px "  target="_blank ">
-                                            
-                                        </a>
-                                       </div>
-                                       
-                                       <a class="twitter-timeline " data-height="560 " href="# "></a> <script async src="https://platform.twitter.com/widgets.js " charset="utf-8 "></script>
-                                 <!-- .upcoming-events -->
-                                </div><!-- .col -->
-                               </div><!-- .cause-content-wrap -->
-                                </div><!-- .cause-wrap -->
-                            </div><!-- .swiper-slide -->
+            <div class="swiper-container causes-slider">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="cause-wrap">
+                            <div class="cause-content-wrap">
+                                <div class="section-heading text-center">
+                                    <a href="https://x.com/SanawarBalam" target="_blank">
+                                        <img src="{{ url('images/Tweeter.png') }}" style="width:190px; height: 60px;" alt="Twitter">
+                                    </a>
+                                </div>
+                                <a class="twitter-timeline" data-height="560" href="https://x.com/SanawarBalam"></a>
+                            </div>
+                        </div>
+                    </div>
 
-                            <div class="swiper-slide ">
-                                <div class="swiper-slide ">
-                                <div class="cause-wrap ">
-                                   <div class="cause-content-wrap ">
-                                       <a href="https://www.facebook.com/CentreforResourceandFacilitation ">
-                                            <div class="col-12 col-md-12 col-lg-12 mt-5 mt-md-0 ">
-                                                <div class="section-heading ">
-                                                   <a href="https://www.facebook.com/CentreforResourceandFacilitation " style="color:#0099ff " target="_blank ">
-                                                       
-                                                       <img src="images/fb.png " style="width:225px "style="height: 45px " style= "font-size:20px "  target="_blank "> </a>
-                                                </div>
-                                                
-                                                <iframe src="https://www.facebook.com/CentreforResourceandFacilitation " scrolling="no " frameborder="0 " allowtransparency="true " style="border:none; overflow:hidden; width: 100%; margin-top: 10px; margin-bottom:
-                            10px; height:535px "></iframe>
-                                            </div>
-                                      </a>
-                               </div><!-- .cause-content-wrap -->
-                                </div><!-- .cause-wrap -->
-                            </div><!-- .swiper-slide -->
-                            </div><!-- .swiper-slide -->
-                          <div class="swiper-slide ">
-                                <div class="swiper-slide ">
-                                <div class="cause-wrap ">
-                                   <div class="cause-content-wrap ">
-                                        <div class="col-12 col-md-12 col-lg-12 mt-5 mt-md-0 ">
-                                       <div class="section-heading ">
-                                      <a href="https://www.facebook.com/CentreforResourceandFacilitation " style="color:#0099ff " target="_blank ">
-                                          <img src="# " style="width:190px " style= "font-size:20px "  target="_blank ">
-                                          
-                                      </a> 
-                                     
-                                       </div>
-                                     
-                                    <div class="entry-content ">
-                                   <a href="https://www.facebook.com/CentreforResourceandFacilitation "> <img src="# " class="img-responsive " alt="PCMR " width="100% " height="515px "></a>
-                                     </div>
-                                 <!-- .upcoming-events -->
-                                </div><!-- .col -->
-                               </div><!-- .cause-content-wrap -->
-                                </div><!-- .cause-wrap -->
-                            </div><!-- .swiper-slide -->
-                            </div><!-- .swiper-slide -->
-                       </div><!-- .swiper-wrapper -->
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="cause-wrap">
+                            <div class="cause-content-wrap">
+                                <div class="section-heading text-center">
+                                    <a href="https://www.facebook.com/CentreforResourceandFacilitation" target="_blank">
+                                        <img src="{{ url('images/fb.png') }}" style="width:225px; height: 45px;" alt="Facebook">
+                                    </a>
+                                </div>
+                                <iframe src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/CentreforResourceandFacilitation"
+                                    scrolling="no" frameborder="0" allowtransparency="true"
+                                    style="border:none; overflow:hidden; width:100%; height:535px;">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
 
-                    </div><!-- .swiper-container -->
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="cause-wrap">
+                            <div class="cause-content-wrap">
+                                <div class="section-heading text-center">
+                                    <a href="https://www.linkedin.com/company/crfpakistan/" target="_blank">
+                                        <img src="{{ url('images/linkedin.png') }}" alt="Social Link" style="width:190px;">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    <!-- Add Arrows -->
-                    
-                </div><!-- .col -->
-            </div><!-- .row -->
         </div><!-- .container -->
     </div><!-- .our-causes -->
+@endsection
+
+@section('page-specific-js')
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Swiper('.causes-slider', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+        });
+    });
+</script>
+
 @endsection
